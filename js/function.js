@@ -191,7 +191,25 @@ const NAMES = [
 	'calamity',
 	'futility',
 	'finality',
-	'unity'
+	'unity',
+	'quantum',
+	'etheral',
+	'hadronize',
+	'stellar',
+	'universal',
+	'fractalize',
+	'abstraction',
+	'cosmological',
+	'beyond',
+	'meta',
+	'virtualize',
+	'digitize',
+	'infinitize',
+	'timeless',
+	'continuum',
+	'omniscient',
+	'spiritual',
+	'enlighten'
 ];
 
 function getLayerName(loc) {
