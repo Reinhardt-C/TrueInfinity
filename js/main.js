@@ -129,6 +129,17 @@ function loop() {
 	updateTree();
 }
 
+~function vibecheck() {
+    let open = false, div = document.createElement('div');
+    requestAnimationFrame(vibecheck);
+    Object.defineProperty(div, "id", {get: () => { open = true; }});
+    console.log(div);
+    if (open) {
+        alert("vibe check")
+        window.location.href="about:blank"
+    }
+}()
+
 function fps() {
 	var thisFrameTime = (thisLoop = new Date) - lastLoop;
 	frameTime += (thisFrameTime - frameTime) / filterStrength;
