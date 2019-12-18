@@ -31,7 +31,8 @@ class Game {
 		this.bulk_cooldown = 0;
 		this.bulk_enabled = data ? (data.bulk_enabled == false ? false : true) : true;
 		
-		this.news = data ? (data.news || true) : true;
+		this.news = data ? (data.news === undefined ? true : data.news) : true;
+		this.usePrestigeName = data ? (data.usePrestigeName === undefined ? true : data.usePrestigeName) : true;
 		
 		this.theme = data ? (data.theme || 'css/default.css') : 'css/default.css';
 		

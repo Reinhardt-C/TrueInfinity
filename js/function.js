@@ -386,7 +386,7 @@ function getLayerName(loc) {
 	let str = '';
 	if (loc.length == 1) {
 		if (JSON.stringify(loc) != joa([0])) {
-			if (loc[0].gt(NAMES.length)) {
+			if (!game.usePrestigeName||loc[0].gt(NAMES.length)) {
 				str = 'p' + (f(loc[0].add(1)));
 			} else {
 				str = NAMES[loc[0].sub(1).mod(NAMES.length).toNumber()];
@@ -617,6 +617,10 @@ function popup(txt, color) {
 
 function togglent() {
 	game.news = !game.news;
+}
+
+function togglepn() {
+	game.usePrestigeName = !game.usePrestigeName;
 }
 
 function themeTo(theme) {

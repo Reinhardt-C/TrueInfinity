@@ -171,6 +171,12 @@ function setElems() {
 		document.getElementById('tn').className = document.getElementById('tn').className.replace('green', 'red');
 	}
 	
+	if (game.usePrestigeName) {
+		document.getElementById('tpn').className = document.getElementById('tpn').className.replace('red', 'green');
+	} else {
+		document.getElementById('tpn').className = document.getElementById('tpn').className.replace('green', 'red');
+	}
+	
 	for (let p2 in game.prestige) {
 		let p = game.prestige[p2];
 		setElem('ama' + JSON.stringify(p.loc), `
