@@ -1,0 +1,78 @@
+* {
+	color: white;
+}
+
+button {
+	background-color: grey;
+	border-color: grey;
+}
+
+#topbar {
+	background-color: #404040;
+}
+
+#sidebar {
+	background-color: #202020;
+}
+
+#main {
+	background-color: black;
+}
+
+.p {
+	background-color: #303030;
+}
+
+.r {
+	background-color: #404040;
+}
+
+.g, .lg {
+	background-color: #505050;
+}
+
+.auto {
+	background-color: #505050;
+}
+
+/* Color Classes */
+
+.grey {
+	background-color: darkgrey;
+	border-color: grey;
+}
+
+.lightgrey {
+	background-color: darkgrey;
+	border-color: grey;
+}
+
+.blue {
+	background-color: mediumslateblue;
+	border-color: #392759;
+}
+
+.green {
+	background-color: #3E885B;
+	border-color: #034C3C;
+}
+
+.red {
+	background-color: #B23A48;
+	border-color: #66101F;
+}
+
+.brown {
+	background-color: #513C2C;
+	border-color: #28190E;
+}
+
+.aqua {
+	background-color: #7B5E7B;
+	border-color: #1C0221;
+}
+
+.yellow {
+	background-color: #C36F09;
+	border-color: #A63C06;
+}

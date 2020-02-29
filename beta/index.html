@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>True Infinity</title>
+		
+	<link href='assets/img/favicon.png' rel='icon'>
+	</link>
+	<link id='sb' href='css/styled_buttons.css' rel='stylesheet'>
+	</link>
+	<link id='ss' href='css/stylesheet.css' rel='stylesheet'>
+	</link>
+		
+	<link id='theme' href='css/default.css' rel='stylesheet'>
+	</link>
+		
+		<meta charset="UTF-8">
+		<meta name="description" content="More Infinite than Any Game to Date!" />
+		<meta name="keywords" content="Idle,Game,Indie,True,Infinity,Incremental" />
+		<meta name="author" content="Reinhardt (Logan McDonald)" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="google-site-verification" content="x4dhb8CYA-CckrCCj2Mc0qbrX6Yw9WmxAZieFdIQjQk" />
+		
+		<script src='js/OmegaNum.js'></script>
+		<script src='js/notation.js'></script>
+		<script src='js/main.js'></script>
+		<script src='js/game.js'></script>
+		<script src='js/set.js'></script>
+		<script src='js/create.js'></script>
+		<script src='js/function.js'></script>
+		<script src='js/automation.js'></script>
+		<script src='js/achievement.js'></script>
+		<script src='js/news.js'></script>
+		<script src='js/hotkey.js'></script>
+		
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-146664738-1"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'UA-146664738-1');
+		</script>
+	</head>
+
+	<body onload='tabs()'>
+		<div style='display: none;'>
+			<textarea id='expout'></textarea>
+		</div>
+		<div id='popupwrapper'>
+		</div>
+		<div id='game'>
+			<div id='topbar'>
+			<p style='float: left;' style='width: 250px'>True Infinity | β0.9.2.3 | Reinhardt | FPS:</p>
+			<p id='fps' style='width: 20px; margin: 0; display: inline; float: left'></p>
+				
+			<span
+				style='float: left; display: inline-block; width: calc(100vw - 606px); margin-left: 7.5px; margin-right: 7.5px; position: relative; overflow: hidden; height: 35px;'>
+				<p id='news' style='position: absolute; width: auto; max-height: 35px; white-space: nowrap;'>THIS IS A
+					TEST</p>
+				</span>
+				
+				<span style='float: right; width: 320px;'>
+					<a href='https://discord.gg/Jgrystv'>Discord</a>
+					<a href='html/about.html'>How to Play</a>
+					<a href='html/patch_notes.html'>Patch Notes</a>
+					<a href='html/source.html'>Source Code</a>
+				</span>
+			</div>
+			
+			<div id='sidebar'>
+				<button id='toggleSB' class='sbb' onclick='toggleSB()'>>></button>
+				<br><br>
+				<button id='mt0' class='mt sbb grey' onclick='mt(0)'>Di</button>
+				<button id='mt1' class='mt sbb blue' onclick='mt(1)'>Op</button>
+				<button id='mt2' class='mt sbb aqua' onclick='mt(2)'>St</button>
+				<button id='mt3' class='mt sbb red' onclick='mt(3)'>Ac</button>
+				<button id='mt4alt' class='mt sbb yellow mt4' onclick='mt(4)'>?</button>
+				<button id='mt4' class='mt sbb yellow mt4' onclick='mt(4)'>Au</button>
+				<button id='mt5alt' class='mt sbb green mt5' onclick='mt(5)'>?</button>
+				<button id='mt5' class='mt sbb green mt5' onclick='mt(5)'>La</button>
+				<p id='credit'></p>
+			</div>
+			
+			<div id='main'>
+				<div id='mtb0' class='maintab'>
+					<div id='layerswrapper'>
+					</div>
+				</div>
+				<div id='mtb1' class='maintab'>
+				<button class='sbb aqua half height x2' onclick='ot(0)'>Save</button><button
+					class='sbb aqua half height x2' onclick='ot(1)'>Other</button>
+				<hr><br>
+				<hr>
+					<div id='otb0' class='optiontab'>
+						<button id='save' class='sbb green' onclick='save("man")'>SAVE</button>
+						<button id='load' class='sbb aqua' onclick='load()'>LOAD</button>
+						<br><br>
+						<button id='as' class='sbb green' onclick='toggleas()'>AUTOSAVE</button>
+						<p id='asintvp'>Autosave every <input id='asintv'></input> seconds<p>
+						<br><br>
+						<button id='exp' class='sbb green' onclick='exp()'>EXPORT</button>
+						<button id='imp' class='sbb aqua' onclick='imp()'>IMPORT</button>
+						<br><br>
+						<button id='ws' class='sbb red' onclick='wipe()'>HARD RESET</button>
+					</div>
+					<div id='otb1' class='optiontab'>
+						<button id='tn' class='sbb green' onclick='togglent()'>Toggle News</button><br><br>
+						<button id='tpn' class='sbb green' onclick='togglepn()'>Toggle Prestige Name</button><br><br>
+						<select id='notation' class='sbb aqua'>
+							<option value='sci'>Scientific Notation</option>
+							<option value='eng'>Engineering Notation</option>
+							<option value='log'>Logarithm Notation</option>
+							<option value='est'>Naruyoko's Standard Notation</option>
+							<option value='exs'>Extended Standard Notation</option>
+							<option value='msc'>Mixed Scientific Notation</option>
+							<option value='men'>Mixed Engineering Notation</option>
+							<option value='mlg'>Mixed Logarithm Notation</option>
+							<option value='uar'>Up Arrow Notation</option>
+							<option value='chn'>Chained Arrow Notation</option>
+							<option value='ban'>Bird's Array Notation</option>
+							<option value='hyp'>Hyper E Notation</option>
+							<option value='inf'>Infinity Notation</option>
+						<!-- <option value='tin'>True Infinity Notation</option> -->
+						</select>
+						<select id='themes' class='sbb aqua'>
+							<option value='css/default.css'>Default</option>
+							<option value='css/dark.css'>Dark</option>
+							<option value='css/cancer.css'>Cancer</option>
+							<option value='css/tiedye.css'>Tie Dye</option>
+							<option value='css/spooky.css'>Spooky</option>
+							<option value='css/midnight.css'>Midnight</option>
+							<option value='css/empty.css'>Empty</option>
+							<option value='css/naruyoko.css'>Light &lt;p&gt;astel</option>
+							<option value='css/epilepsy.css'>Epilepsy</option>
+							<option value='void'>Void</option>
+						</select>
+					</div>
+				</div>
+				<div id='mtb2' class='maintab'>
+					<div id='stats'>
+					</div>
+				</div>
+				<div id='mtb3' class='maintab'>
+					<h2>Achievements</h2>
+					<br><br>
+					<div id='achwrapper'>
+					</div>
+				</div>
+				<div id='mtb4' class='maintab'>
+				<img id='autolock' src='assets/img/locked.png' title='This feature is locked until you reach celerity'
+					alt='This feature is locked until you reach celerity' style='margin-top: 25px;'>
+					<div id='autodiv'>
+					</div>
+					<br>
+				<button id='autoauto' class='sbb red' onclick='buyautoauto()'>Automate Purchasing of Automation: ee6
+					antimatter</button>
+					<br>
+				<img id='autobulklock' src='assets/img/locked.png' title='This feature is locked until you reach p500'
+					alt='This feature is locked until you reach p200' style='margin-top: 25px;' width='256'
+					height='256'>
+					<button id='bt' class='sbb green' onclick='toggleBulkPrestige()'>Bulk Prestige: Enabled</button>
+					<div id='autobulkdiv'>
+					<button id='buybulkauto' class='sbb red' onclick='buybulkprestige()'>Increase Auto Prestige
+						Level:</button>
+						<div class='horizflex'>
+							<div id='ll0' class='levellight red'>Level 1</div>
+							<div id='ll1' class='levellight red'>Level 2</div>
+							<div id='ll2' class='levellight red'>Level 3</div>
+							<div id='ll3' class='levellight red'>Level 4</div>
+							<div id='ll4' class='levellight red'>Level 5</div>
+							<div id='ll5' class='levellight red'>Level 6</div>
+						</div>
+					</div>
+				</div>
+				<div id='mtb5' class='maintab'>
+				<img id='laylock' src='assets/img/locked.png' title='This feature is locked until you reach pe308'
+					alt='This feature is locked until you reach pe308' style='margin-top: 25px;'>
+					<div id='metadiv'>
+						<button id='metap' onclick='prestigeTo([0, 1])'>Meta Infinity for 0 points</button><br><br>
+						<div id='tree'>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			init();
+		</script>
+	</body>
+
+</html>

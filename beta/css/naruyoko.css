@@ -1,0 +1,82 @@
+* {
+  font-family: "Consolas", monospace;
+}
+
+.sbb {
+  border-width: 3px;
+  border-radius: 3px;
+}
+
+#topbar {
+  background-color: #8CB7E6;
+  border: 1px solid #73C9A1;
+}
+
+#sidebar {
+  background-color: #9EDfA2;
+  border: 1px dashed #B7E889;
+}
+
+#main {
+  background-color: #B4ADB8;
+}
+
+.p {
+  background-color: #8787B0;
+  border: 1px solid #79A8AD;
+}
+
+.r {
+  background-color: #B7C2D0;
+  overflow-y: scroll;
+}
+
+.g, .lg {
+  background-color: #8DC7A6;
+}
+
+.auto {
+  background-color: #B7C2D0;
+}
+
+/* Color Classes */
+
+.grey {
+  background-color: darkgrey;
+  border-color: grey;
+}
+
+.lightgrey {
+  background-color: silver;
+  border-color: lightgrey;
+}
+
+.blue {
+  background-color: mediumslateblue;
+  border-color: #392759;
+}
+
+.green {
+  background-color: #B5DDA4;
+  border-color: #4DAA57;
+}
+
+.red {
+  background-color: pink;
+  border-color: darkred;
+}
+
+.brown {
+  background-color: #513C2C;
+  border-color: #28190E;
+}
+
+.aqua {
+  background-color: #ACEDFF;
+  border-color: #89BBFE;
+}
+
+.yellow {
+  background-color: #FFD151;
+  border-color: #F8C537;
+}

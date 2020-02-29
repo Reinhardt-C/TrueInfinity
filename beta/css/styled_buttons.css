@@ -1,0 +1,54 @@
+.sbb {
+	width: 100%;
+	height: 40px;
+	border-width: 5px;
+	border-style: solid;
+	border-radius: 5px;
+	display: inline-block;
+	transition: width 0.2s;
+}
+
+.sbb:focus {
+	outline: none;
+}
+
+.sbb.half {
+	width: 50%;
+	height: 30px;
+}
+
+.sbb.half.x2 {
+	height: 60px;
+}
+
+.sbb.height:hover:not(x2) {
+	height: 28px;
+}
+
+.sbb.height:active:not(x2) {
+	height: 25px;
+}
+
+.sbb.height.x2:hover {
+	height: 56px;
+}
+
+.sbb.height.x2:active {
+	height: 50px;
+}
+
+.sbb:hover:not(.height):not(.half) {
+	width: 98%;
+}
+
+.sbb:active:not(.height):not(.half) {
+	width: 95%;
+}
+
+.sbb.half:hover:not(.height) {
+	width: 49%;
+}
+
+.sbb.half:active:not(.height) {
+	width: 42.5%;
+}

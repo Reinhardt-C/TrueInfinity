@@ -1,0 +1,78 @@
+* {
+	color: white;
+}
+
+button {
+	background-color: grey;
+	border-color: grey;
+}
+
+#topbar {
+	background-color: #404040;
+}
+
+#sidebar {
+	background-color: #202020;
+}
+
+#main {
+	background-image: url('../assets/img/spooky.png');
+}
+
+.p {
+	background-color: #303030;
+}
+
+.r {
+	background-color: #404040;
+}
+
+.g, .lg {
+	background-color: #505050;
+}
+
+.auto {
+	background-color: #505050;
+}
+
+/* Color Classes */
+
+.grey {
+	background-color: #FE9920;
+	border-color: #F75C03;
+}
+
+.lightgrey {
+	background-color: #FE9920;
+	border-color: #F75C03;
+}
+
+.blue {
+	background-color: #FE9920;
+	border-color: #F75C03;
+}
+
+.green {
+	background-color: #FE9920;
+	border-color: #F75C03;
+}
+
+.red {
+	background-color: #FE9920;
+	border-color: #F75C03;
+}
+
+.brown {
+	background-color: #FE9920;
+	border-color: #F75C03;
+}
+
+.aqua {
+	background-color: #FE9920;
+	border-color: #F75C03;
+}
+
+.yellow {
+	background-color: #FE9920;
+	border-color: #F75C03;
+}

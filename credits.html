@@ -1,0 +1,136 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon">
+    <title>Credits</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: white;
+        }
+        body {
+            overflow: hidden;
+            height: 100%;
+        }
+        marquee {
+            width: 100%;
+            text-align: center;
+            font-size: 20px;
+            transform: translateY(-85%);
+            height: calc(4956px + 85% - 520px);
+        }
+        table {
+            display: inline-block;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+
+    <script>
+        let $ = id => document.getElementById(id);
+        function getPositionXY(element) {return element.getBoundingClientRect()};
+        setInterval(function() {
+            if (getPositionXY($('TI')).y <= 100) document.querySelector('marquee').stop();
+        },50);
+    </script>
+</head>
+<body>
+    <marquee direction="up" loop="1" behaviour="slide">
+        <h1>Inspiration</h1>
+        Hevipelle, creator of Antimatter Dimensions<br>
+        dan-simon, creator of Infinite Layers<br>
+        Patcail, creator of True Tetrational, Tetrational Madness and other large number incrementals<br>
+        <br><br><br><br><br>
+        <h1>Advertising</h1>
+        1e308, made a YouTube video of True Infinity β at some point<br>
+        Nintendo Gamecube Man, created the True Infinity Discord Server<br>
+        SuperSpruce, created a 2 part YouTube series of True Infinity β<br>
+        <br><br><br><br><br>
+        <h1>Libraries</h1>
+        Created with lodash<br>
+        OmegaNum.js (β) and ExpantaNum.js (γ) by Naruyoko<br>
+        <br><br><br><br><br>
+        <h1>User Interface</h1>
+        <h2>Achievement Images (β)</h2>
+        <table>
+            <tr>
+                <th>ShianaraPlayZ</th>
+                <th>The Incremental Nerd</th>
+                <th>Naruyoko</th>
+                <th>ItMarki</th>
+            </tr>
+            <tr>
+                <td>Scientific Notation</td>
+                <td>Googol</td>
+                <td>Eternal Suffering</td>
+                <td>What Just Happened?</td>
+            </tr>
+            <tr>
+                <td>You Should Probably Use Hyper E Now</td>
+                <td>Infinity</td>
+                <td>This Makes Things Easier</td>
+                <td>I'm Confused as to Why You're Still Playing</td>
+            </tr>
+            <tr>
+                <td>Prefix Milli- Doesn't Imply Smaller</td>
+                <td></td>
+                <td></td>
+                <td>Automation Inception</td>
+            </tr>
+            <tr>
+                <td>Why Wasn't This in Infinite Layers?</td>
+                <td></td>
+                <td></td>
+                <td>Exponential Prestige</td>
+            </tr>
+        </table>
+        <br><br><br>
+        <h2>Notations (β)</h2>
+        <table>
+            <tr>
+                <th>Reinhardt</th>
+                <th>Naruyoko</th>
+            </tr>
+            <tr>
+                <td>Scientific Notation</td>
+                <td>Naruyoko's Standard Notation</td>
+            </tr>
+            <tr>
+                <td>Engineering Notation</td>
+                <td>Extended Standard Notation</td>
+            </tr>
+            <tr><td>Logarithm Notation</td></tr>
+            <tr><td>Mixed Notations</td></tr>
+            <tr><td>Up Arrow Notation</td></tr>
+            <tr><td>Bird's Array Notation</td></tr>
+            <tr><td>Hyper E Notation</td></tr>
+            <tr><td>Infinity Notation</td></tr>
+        </table>
+        <br><br><br>
+        <h3>News Ticker by Hevipelle (β)<br>
+        Tooltips by Hevipelle<br></h3>
+        <br><br><br><br><br>
+        <h1>Other</h1>
+        <h3>Special Thanks To:</h3>
+        <ul>
+            <li>Soul147 for the collaborative release of True Infinity β and Antimatter Dimensions -1 Eternity Update</li>
+            <li>ItMarki for the Chinese Translation of True Infinity β</li>
+        </ul>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <h1>Concept Design</h1>
+        <h2>Reinhardt</h2>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <h1>Development</h1>
+        <h2>Naruyoko</h2>
+        <h2>Reinhardt</h2>
+        <h2>Nyan Cat</h2>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <img src="assets/ti.png" id="TI" title="This was the real easter egg">
+    </marquee>
+</body>
+</html>

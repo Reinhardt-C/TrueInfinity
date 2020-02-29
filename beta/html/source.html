@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Source Code</title>
+		<link href='../assets/img/favicon.png' rel='icon'></link>
+		
+		<style type='text/css'>
+			ul, #myUL {
+				list-style-type: none;
+			}
+			
+			#myUL {
+				margin: 0;
+				padding: 0;
+			}
+
+			.caret {
+				cursor: pointer; 
+				user-select: none;
+			}
+
+			.caret::before {
+				content: "\25B6";
+				color: black;
+				display: inline-block;
+				margin-right: 6px;
+			}
+
+			.caret-down::before {
+				transform: rotate(90deg); 
+			}
+
+			.nested {
+				display: none;
+			}
+
+			.active {
+				display: block;
+			}
+		</style>
+		
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-146664738-1"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'UA-146664738-1');
+		</script>
+	</head>
+	
+	<body>
+		<ul id="myUL">
+			<li><span class="caret">Code</span>
+				<ul class="nested">
+					<li>index.html</li>
+					<li><a href='../changelog.md'>changelog.md</a></li>
+					<li><span class="caret">html</span>
+						<ul class="nested">
+							<li>about.html</li>
+							<li>patch_notes.html</li>
+							<li>source.html</li>
+						</ul>
+					</li>
+					<li><span class="caret">css</span>
+						<ul class="nested">
+							<li><a href='../css/stylesheet.css'>stylesheet.css</a></li>
+							<li><a href='../css/styled_buttons.css'>styled_buttons.css</a></li>
+						</ul>
+					</li>
+					<li><span class="caret">js</span>
+						<ul class="nested">
+							<li><a href='../js/create.js'>create.js</a></li>
+							<li><a href='../js/function.js'>function.js</a></li>
+							<li><a href='../js/game.js'>game.js</a></li>
+							<li><a href='../js/main.js'>main.js</a></li>
+							<li><a href='../js/create.js'>create.js</a></li>
+							<li><a href='../js/notation.js'>notation.js</a></li>
+							<li><a href='../js/OmegaNum.js'>OmegaNum.js</a></li>
+							<li><a href='../js/set.js'>set.js</a></li>
+							<li><a href='../js/automation.js'>automation.js</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	
+		<a href='https://github.com/Reinhardt-C/TrueInfinity'>Github</a>
+		
+		<script>
+			var toggler = document.getElementsByClassName("caret");
+			var i;
+
+			for (i = 0; i < toggler.length; i++) {
+				toggler[i].addEventListener("click", function() {
+					this.parentElement.querySelector(".nested").classList.toggle("active");
+					this.classList.toggle("caret-down");
+				});
+			}
+		</script>
+	</body>
+</html>

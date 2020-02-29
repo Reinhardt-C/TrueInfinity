@@ -1,0 +1,78 @@
+* {
+	color: white;
+}
+
+button {
+	background-color: black;
+	border-color: black;
+}
+
+#topbar {
+	background-color: black;
+}
+
+#sidebar {
+	background-color: black;
+}
+
+#main {
+	background-color: black;
+}
+
+.p {
+	background-color: black;
+}
+
+.r {
+	background-color: black;
+}
+
+.g, .lg {
+	background-color: black;
+}
+
+.auto {
+	background-color: black;
+}
+
+/* Color Classes */
+
+.grey {
+	background-color: black;
+	border-color: black;
+}
+
+.lightgrey {
+	background-color: black;
+	border-color: black;
+}
+
+.blue {
+	background-color: black;
+	border-color: black;
+}
+
+.green {
+	background-color: black;
+	border-color: black;
+}
+
+.red {
+	background-color: black;
+	border-color: black;
+}
+
+.brown {
+	background-color: black;
+	border-color: black;
+}
+
+.aqua {
+	background-color: black;
+	border-color: black;
+}
+
+.yellow {
+	background-color: black;
+	border-color: black;
+}
