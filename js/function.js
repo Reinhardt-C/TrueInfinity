@@ -23,6 +23,18 @@ function toggleSidebar() {
   game.sbe = !game.sbe;
 }
 
+function focusLinks() {
+  document.getElementById('linkscontainer').classList.add('expanded');
+  document.getElementById('linksarrow').classList.add('expanded');
+  document.getElementById('links').classList.add('expanded');
+}
+
+function blurLinks() {
+  document.getElementById('linkscontainer').classList.remove('expanded');
+  document.getElementById('linksarrow').classList.remove('expanded');
+  document.getElementById('links').classList.remove('expanded');
+}
+
 function setdisp(id, disp) {
   document.getElementById(id).style.display = disp;
 }

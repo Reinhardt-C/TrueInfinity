@@ -113,15 +113,56 @@ hr {
   display: inline-block;
 }
 
-#links {
+#linkscontainer {
+  transition: 2s;
   white-space: nowrap;
-  width: 221px;
-  height: 35px;
-  overflow-x: auto;
-  overflow-y: visible;
-  margin-right: 5px;
+  min-height: 35px;
+  overflow: hidden;
   float: right;
-/*   display: inline-block; /* Should we ask Stack Overflow?  */
+  margin-right: 0;
+  text-align: right;
+  background-color: darkgrey;
+  display: inline-block;
+}
+
+#linkscontainer.expanded {
+  background-color: #696969;
+}
+
+#linksarrow {
+  transition: 2s;
+  white-space: nowrap;
+  width: 20px;
+  text-align: right;
+  position: relative;
+  float: right;
+  padding-right: 5px;
+  z-index: 1;
+  display: block;
+}
+
+#linksarrow.expanded {
+  transform: rotate(180deg);
+}
+
+#links {
+  transition: 2s;
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-align: right;
+  position: relative;
+  float: right;
+  padding-right: 5px;
+  margin-top: 35px;
+  right: -20px;
+  height: 0;
+  background-color: darkgrey;
+  z-index: 0;
+}
+
+#links.expanded {
+  height: min(175px,calc(100vh - 35px));
+  background-color: #696969;
 }
 
 .side {
