@@ -126,7 +126,7 @@ hr {
 }
 
 #linkscontainer.expanded {
-  background-color: #696969;
+  background-color: #999999;
 }
 
 #linksarrow {
@@ -162,7 +162,7 @@ hr {
 
 #links.expanded {
   height: min(175px,calc(100vh - 35px));
-  background-color: #696969;
+  background-color: #999999;
 }
 
 .side {
