@@ -2,6 +2,9 @@
 
 ## γ1.1
 
+### γ1.1.2
+* Hotfix: You don't gain any unfunity
+
 ### γ1.1.1
 * Hotfix: Dimensional Compression after Dimensional Collapse breaks
 
