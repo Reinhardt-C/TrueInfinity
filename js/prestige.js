@@ -7,6 +7,12 @@ class Game {
     this.prestige = {};
     this.upgradesBought = [];
     for (let i in config.upgrades) this.upgradesBought[i] = D(0);
+
+    this.unfunitypoints = D(0);
+
+    this.unfunityUpgBought = [];
+    for (let i in config.unfunityUpgrades) this.unfunityUpgBought[i] = D(0);
+    this.unfunityUpgrades = {};
     
     this.upgrades = {};
     
@@ -311,9 +317,8 @@ class Dimension extends hasCache {
   }
   
   get mult() {
-    return this.callCache("mult", function() {
-      let ret = D.pow(this.multPerBought, this.bought)
-      if (game.upgradesBought.dimColl.eq(1) && ret.gt(1)) ret = D.pow(ret, 2)
+    return this.callCache("mult",function () {
+      let ret = D.pow(this.multPerBought,this.bought).mul(D(1.01).pow((game.unfunityUpgBought.superUnfun ? game.unfunityUpgBought.superUnfun : D(0)).add(1)).pow(game.unfunitypoints));
       return ret
     })
   }

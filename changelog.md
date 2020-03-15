@@ -1,5 +1,12 @@
 # γ
 
+## γ1.1
+
+### γ1.1.0
+* Made Dimension Collapse upgrade weaker
+* Added Unfunity which serves as offline progress
+* Added Unfunity Upgrades which do stuff
+
 ## γ1.0
 
 ### γ1.0.0
@@ -90,7 +97,7 @@
 		True Infinity Notation
 
 ### α1.4.1
-* Fix bug stopping new player from playing
+* Fix bug stopping new players from playing
 * Add Discord link
 
 ### α1.4.0
@@ -124,7 +131,7 @@
 ## α1.2
 
 ### α1.2.2
-* **HUGE** Performance increase (I used shotcuts to achieve this, so slightly less accurate calculation, but who cares?)
+* **HUGE** Performance increase (I used shortcuts to achieve this, so slightly less accurate calculation, but who cares?)
 * Slowed down the early game
 
 ### α1.2.1

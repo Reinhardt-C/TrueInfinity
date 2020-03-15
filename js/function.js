@@ -81,6 +81,7 @@ function breakPoint() {
 function clearAll() {
   document.getElementById('layers').innerHTML = '';
   document.getElementById('upgrades1').innerHTML = '';
+  document.getElementById('unfunUpg').innerHTML = '';
 }
 
 function secretFormula(amount, dim) {
@@ -136,4 +137,16 @@ class hasCache {
     this.doCache[name] = true
     return this.cache[name]
   }
+}
+
+function getDisplayTime(ms) {
+  if (ms < 1000) return Math.floor(ms) + ' millisecond' + (Math.floor(ms) > 1 ? 's' : '');
+  if (ms < 60000) return (ms / 1000).toFixed(1) + ' seconds' + (Math.floor(ms / 1000) > 1 ? 's' : '');
+  if (ms < 3600000) return (ms / 60000).toFixed(1) + ' minutes' + (Math.floor(ms / 60000) > 1 ? 's' : '');;
+  if (ms < 8.64e+7) return Math.floor(ms / 3600000) + ' hour' + (Math.floor(ms / 3600000) > 1 ? 's' : '') + ' and ' + Math.floor(((ms / 3600000) - Math.floor(ms / 3600000)) * 60) + ' minutes';
+  else return (ms / 8.64e+7).toFixed(1) + ' day' + (ms / 8.64e+7 > 1 ? 's' : '');;
+}
+
+function closeWB() {
+  document.getElementById('welcomeback').style.display = 'none';
 }

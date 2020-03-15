@@ -32,10 +32,11 @@ function nyanLoad(save, imp=false) {
     }
     clearAll()
     game = new Game()
-    let temp = ["lastUpdate", "notation", "upgradesBought"]
+    let temp = ["lastUpdate","notation","upgradesBought","unfunityUpgBought"];
     temp.forEach(function(name) {
       if (name in save) game[name] = save[name]
     })
+    game.unfunitypoints = D(save.unfunitypoints);
     
     // Run some init stuff
     setupUpgrades()
@@ -45,6 +46,11 @@ function nyanLoad(save, imp=false) {
       game.upgradesBought[id] = D(game.upgradesBought[id])
     }
     
+    // unfunityUpgrades
+    for (let id in game.unfunityUpgBought) {
+      game.unfunityUpgBought[id] = D(game.unfunityUpgBought[id])
+    }
+
     // prestige
     for (let i=0; i<save.prestige.length; i++) {
       layer = save.prestige[i]
@@ -69,11 +75,16 @@ function getMinimalGameObj() {
   let ret = {
     lastUpdate: game.lastUpdate,
     notation: game.notation,
+    unfunitypoints: game.unfunitypoints.toString(),
     upgradesBought: {},
+    unfunityUpgBought: {},
     prestige: Object.values(game.prestige).map(x => x.objectify())
   }
   for (let id in game.upgradesBought) {
     ret.upgradesBought[id] = game.upgradesBought[id].toString()
+  }
+  for (let id in game.unfunityUpgBought) {
+    ret.unfunityUpgBought[id] = game.unfunityUpgBought[id].toString()
   }
   return ret
 }

@@ -21,9 +21,29 @@ let config = {
       name: 'Dimensional Collapse',
       baseCost: D(1e125),
       costScale: D(1),
-      desc: 'Dimension powers are raised to the power of 2.',
+      desc: 'Dimensions \'collapse\' after dimension 10 increasing production',
       levelCap: D(1),
       onBuy: []
+    }
+  },
+  unfunityUpgrades: {
+    doubleUnfun: {
+      name: 'Double Unfun',
+      baseCost: D(3),
+      costScale: D(3),
+      levelCap: D(5),
+      desc: 'Doubles the amount of unfunity points you gain with offline time',
+      addr: ['unfunitypoints'],
+      currencyName: 'unfunity points'
+    },
+    superUnfun: {
+      name: 'Super Unfun',
+      baseCost: D(10),
+      costScale: D(10),
+      levelCap: D(5),
+      desc: 'Increases the potency of your unfunity, making it more powerful',
+      addr: ['unfunitypoints'],
+      currencyName: 'unfunity points'
     }
   }
 }

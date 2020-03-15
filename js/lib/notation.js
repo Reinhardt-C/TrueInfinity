@@ -1,5 +1,6 @@
-function f(num) {
-  num = D(num).floor();
+function f(num, digits = 0) {
+  if (digits > 0) num = D(num).mul(Math.pow(10,digits)).floor().div(Math.pow(10,digits));
+  else num = D(num).floor();
   return N[game.notation](num);
 }
 

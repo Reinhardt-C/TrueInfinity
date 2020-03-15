@@ -165,6 +165,27 @@ hr {
   background-color: #999999;
 }
 
+#welcomeback {
+  background-color: #A0A0A0;
+  width: 460px;
+  height: 460px;
+  position: absolute;
+  left: calc(50vw - 250px);
+  top: calc(50vh - 250px);
+  text-align: center;
+  font-size: xx-large;
+  padding: 20px;
+  z-index: 100000000000;
+  border: outset silver 5px;
+}
+
+#close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+
 .side {
 	font-size: 20px;
 }
@@ -229,9 +250,10 @@ hr {
   height: 150px;
   text-align: center;
   background-color: slategray;
-  border: solid 3px silver;
+  border: solid 3px #A0A0A0;
   border-radius: 3px;
   position: relative;
+  display: inline-block !important;
 }
 
 .upgbutton {
@@ -245,7 +267,7 @@ hr {
 
 [data-tooltip] {
 	position: relative;
-  z-index: 10;
+  z-index: 10000000;
 }
 
 [data-tooltip]::before {

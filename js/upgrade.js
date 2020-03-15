@@ -1,8 +1,9 @@
 class Upgrade {
-  constructor(id = 'red') {
+  constructor(id = 'red', loc = 'upgrades') {
     this.id = id;
+    this.loc = loc;
     // name, baseCost, costScale, CSI, desc, levelCap, addr, onBuy, vfunc
-    for (let i in config.upgrades[this.id]) this[i] = config.upgrades[this.id][i];
+    for (let i in config[loc][this.id]) this[i] = config[loc][this.id][i];
     let temp = this.blankUpgrade
     for (let property in temp) {
       this[property] = this[property] || temp[property]
@@ -27,7 +28,7 @@ class Upgrade {
   }
   
   get level() {
-    return game.upgradesBought[this.id]
+    return game[this.loc == 'upgrades' ? 'upgradesBought' : 'unfunityUpgBought'][this.id]
   }
   
   get currency() {
@@ -60,11 +61,12 @@ class Upgrade {
     text.id = 'tupg' + this.id;
     div.appendChild(text);
     
-    document.getElementById('upgrades1').appendChild(div);
+    if (this.loc == 'upgrades') document.getElementById('upgrades1').appendChild(div);
+    else if (this.loc == 'unfunityUpgrades') document.getElementById('unfunUpg').appendChild(div);
   }
   
   domUpdate() {
-    dd(`upg${this.id}`, game.upgradesBought[this.id].neq(0) || this.vfunc())
+    dd(`upg${this.id}`, game[(this.loc == 'upgrades' ? 'upgrades' : 'unfunityUpg') + 'Bought'][this.id].neq(0) || this.vfunc())
     document.getElementById('buyupg' + this.id).innerText = this.level.eq(this.levelCap)?"MAXED":`Buy for ${f(this.cost)+" "+this.currencyName}`
     document.getElementById('tupg' + this.id).innerText = `
       Level: ${this.level}
@@ -75,6 +77,7 @@ class Upgrade {
   
   buy() {
     if (!this.afford) return false;
+    this.currency.subBy(this.cost);
     this.level.addBy(1)
     onBuyTriggers(this.onBuy)
     return true
@@ -83,6 +86,7 @@ class Upgrade {
 
 function setupUpgrades() {
   for (let i in config.upgrades) game.upgrades[i] = new Upgrade(i);
+  for (let i in config.unfunityUpgrades) game.unfunityUpgrades[i] = new Upgrade(i, 'unfunityUpgrades');
 }
 
 function onBuyTriggers(code) {

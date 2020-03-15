@@ -45,11 +45,11 @@
   <script src="js/saving.js"></script>
 </head>
 
-<body onload="startGame()">
+<body onload="startGame()" onunload="nyanSave()">
   <div id='game'>
     <div id='topbar'>
       &nbsp;&nbsp;&nbsp;&nbsp;
-      <span id='title' onmousedown="window.open('credits.html')">True Infinity γ1.0.0</span>
+      <span id='title' onmousedown="window.open('credits.html')">True Infinity γ1.1.0</span>
 <!--       <span id='ticker'></span> -->
       <span id='linkscontainer' onmouseleave="blurLinks()">
         <div id="linksarrow" onmousedown="focusLinks()">&Delta;</div>
@@ -71,7 +71,7 @@
       <button id='tabb1' onclick='tab(1)' class='sbb blue'></button>
       <button id='tabb2' onclick='tab(2)' class='sbb yellow'></button>
       <br><br><br>
-      <button id='tabb100' onclick='tab(100)' class='sbb brown' style='visibility:hidden;'></button>
+      <button id='tabb100' onclick='tab(100)' class='sbb purple'></button>
     </div>
 
     <div id='main'>
@@ -98,14 +98,23 @@
         </div>
       </div>
       <div id='tab100' class='mt'>
-        <div id='console'>
-          <div id='log'>
-
+          <div class="r">
+            <div class="rt" style="text-align: center">
+              <br>
+              <span id="unfunitypoints">0</span>
+              <br>
           </div>
-          <input id='consoleinput'></input>
+          <div id='unfunUpg' class="g" style="height: 300px;padding-top: 15px; text-align: center;">
+          </div>
         </div>
       </div>
     </div>
+  </div>
+
+  <div id="welcomeback">
+    Welcome back!<br>
+    You were offline for <span id='timeoffline'>0</span><span id='gainspan'> so you gain <span id='unfungain'>0</span> unfunity points.</span>
+    <span id="close" onmousedown="closeWB()">&times;&nbsp;</span>
   </div>
 
   <div id="errC" style="position:fixed;bottom:0;right:0;display:none;">
