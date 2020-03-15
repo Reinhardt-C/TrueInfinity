@@ -23,7 +23,8 @@ let config = {
       costScale: D(1),
       desc: 'Dimensions \'collapse\' after dimension 10 increasing production',
       levelCap: D(1),
-      onBuy: []
+      onBuy: [],
+      vfunc: () => _.get(game,["upgradesBought", "dimComp"]).gt(4)
     }
   },
   unfunityUpgrades: {

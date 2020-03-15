@@ -2,6 +2,9 @@
 
 ## γ1.1
 
+### γ1.1.1
+* Hotfix: Dimensional Compression after Dimensional Collapse breaks
+
 ### γ1.1.0
 * Made Dimension Collapse upgrade weaker
 * Added Unfunity which serves as offline progress

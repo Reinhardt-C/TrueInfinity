@@ -47,8 +47,8 @@ function show(id) {
   setdisp(id, 'block');
 }
 
-function dd(id, bool, type="block") { // Decide display
-  setdisp(id, bool?type:"none")
+function dd(id,bool,type = "block") { // Decide display
+  setdisp(id,bool ? type : "none")
 }
 
 function tab(t) {

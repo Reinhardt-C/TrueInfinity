@@ -186,6 +186,10 @@ hr {
   cursor: pointer;
 }
 
+#unfunupg {
+  white-space: nowrap;
+}
+
 .side {
 	font-size: 20px;
 }
@@ -253,7 +257,7 @@ hr {
   border: solid 3px #A0A0A0;
   border-radius: 3px;
   position: relative;
-  display: inline-block !important;
+  display: inline-block;
 }
 
 .upgbutton {

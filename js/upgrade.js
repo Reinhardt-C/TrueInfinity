@@ -66,7 +66,8 @@ class Upgrade {
   }
   
   domUpdate() {
-    dd(`upg${this.id}`, game[(this.loc == 'upgrades' ? 'upgrades' : 'unfunityUpg') + 'Bought'][this.id].neq(0) || this.vfunc())
+
+    dd(`upg${this.id}`, this.vfunc(), 'inline-block')
     document.getElementById('buyupg' + this.id).innerText = this.level.eq(this.levelCap)?"MAXED":`Buy for ${f(this.cost)+" "+this.currencyName}`
     document.getElementById('tupg' + this.id).innerText = `
       Level: ${this.level}
