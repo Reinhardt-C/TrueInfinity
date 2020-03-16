@@ -2,6 +2,9 @@
 
 ## γ1.1
 
+### γ1.1.3
+* Hotfix: I'm so retarded I can't even make formulas for doubling
+
 ### γ1.1.2
 * Hotfix: You don't gain any unfunity
 
