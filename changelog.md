@@ -2,6 +2,9 @@
 
 ## γ1.1
 
+### γ1.1.4
+* Moved the floor in unfunity gain
+
 ### γ1.1.3
 * Hotfix: I'm so retarded I can't even make formulas for doubling
 

@@ -31,8 +31,8 @@ function startGame() {
   diff = (thisUpdate - game.lastUpdate) * diffMultiplier;
   document.getElementById('timeoffline').innerText = getDisplayTime(diff);
   if (diff > 7.2e6) {
-    let hours = Math.floor(diff / 3.6e6);
-    game.unfunitypoints = game.unfunitypoints.add(D.pow(2,game.unfunityUpgBought.doubleUnfun).mul(hours));
+    let hours = diff / 3.6e6;
+    game.unfunitypoints = game.unfunitypoints.add(Math.floor(D.pow(2,game.unfunityUpgBought.doubleUnfun).mul(hours)));
     document.getElementById('unfungain').innerText = f(D.pow(2,game.unfunityUpgBought.doubleUnfun).mul(hours));
     document.getElementById('gainspan').style.display = 'block';
   } else {
