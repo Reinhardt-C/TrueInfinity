@@ -2,6 +2,9 @@
 
 ## γ1.1
 
+### γ1.1.5
+* Buffed Dimensional Collapse
+
 ### γ1.1.4
 * Moved the floor in unfunity gain
 

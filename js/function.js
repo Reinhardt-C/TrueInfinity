@@ -87,8 +87,7 @@ function clearAll() {
 function secretFormula(amount, dim) {
   amount = D(amount)
   dim = D(dim);
-  let result = D.choose(dim.pow(amount.mul(dim)), amount.mul(dim)).pow(2.5);
-  
+  let result = D.max(D.choose(dim.pow(amount.mul(dim)), amount.mul(dim)), dim.pow(amount.mul(dim))).pow(6.5);
   return result;
 }
 
