@@ -32,7 +32,7 @@ let config = {
       name: 'Double Unfun',
       baseCost: D(3),
       costScale: D(3),
-      levelCap: D(5),
+      levelCap: D(Infinity),
       desc: 'Doubles the amount of unfunity points you gain with offline time',
       addr: ['unfunitypoints'],
       currencyName: 'unfunity points'

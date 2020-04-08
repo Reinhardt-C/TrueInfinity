@@ -2,6 +2,9 @@
 
 ## γ1.1
 
+### γ1.1.6
+* Uncapped the Double Unfun upgrade
+
 ### γ1.1.5
 * Buffed Dimensional Collapse
 
