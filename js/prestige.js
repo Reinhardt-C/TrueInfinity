@@ -289,6 +289,13 @@ class Dimension extends hasCache {
 
 	buyMax() {
 		if (!this.afford) return;
+		let p = this.points.logBase(2).mul(2).sqrt().floor();
+		if (p.gte(100)) {
+			this.points.subBy(D.pow(2, p.pow(2).div(2)));
+			this.amount.addBy(p);
+			this.bought.addBy(p);
+			return;
+		}
 		for (let i = 0; i < 5; i++) {
 			this.buy();
 		}
@@ -373,7 +380,7 @@ class Dimension extends hasCache {
 				? ret
 						.mul(ExpandtaNum.max(1, game.prestige[j(a)].power))
 						.mul(ExpandtaNum.max(1, game.prestige[j(a)].points))
-						.pow(4)
+						.pow(4.1)
 				: ret;
 		});
 	}

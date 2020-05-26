@@ -2,6 +2,9 @@
 
 ## γ1.2
 
+### γ1.2.1
+* Better Buy Max / Max All
+
 ### γ1.2.0
 * Unfunity generates online
 * Fixed Dimensionsl Collapse
