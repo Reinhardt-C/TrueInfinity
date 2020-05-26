@@ -1,127 +1,144 @@
 <!DOCTYPE html>
 <html>
+	<head>
+		<title>True Infinity</title>
+		<meta charset="UTF-8" />
+		<meta name="description" content="More Infinite than Any Game to Date!" />
+		<meta name="keywords" content="Idle,Game,Indie,True,Infinity,Incremental" />
+		<meta name="author" content="Reinhardt (Logan McDonald)" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="google-site-verification" content="x4dhb8CYA-CckrCCj2Mc0qbrX6Yw9WmxAZieFdIQjQk" />
 
-<head>
-  <title>True Infinity</title>
-  <meta charset="UTF-8">
-  <meta name="description" content="More Infinite than Any Game to Date!" />
-  <meta name="keywords" content="Idle,Game,Indie,True,Infinity,Incremental" />
-  <meta name="author" content="Reinhardt (Logan McDonald)" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="google-site-verification" content="x4dhb8CYA-CckrCCj2Mc0qbrX6Yw9WmxAZieFdIQjQk" />
+		<link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon" />
 
-  <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon">
+		<link id="ss" href="css/stylesheet.css" rel="stylesheet" />
+		<link id="sb" href="css/sbb.css" rel="stylesheet" />
+		<link id="theme" href="css/default.css" rel="stylesheet" />
+		<!-- Global error handler -->
+		<script src="js/error.js"></script>
 
-  <link id='ss' href='css/stylesheet.css' rel='stylesheet'>
-  </link>
-    <link id='sb' href='css/sbb.css' rel='stylesheet'>
-  </link>
-  <link id='theme' href='css/default.css' rel='stylesheet'>
-  </link>
-  <!-- Global error handler -->
-  <script src="js/error.js"></script>
+		<!-- Basic libs -->
+		<script src="js/lib/ExpantaNum.js"></script>
+		<script src="js/lib/mousetrap.js"></script>
+		<script src="js/lib/notation.js"></script>
+		<script src="js/lib/clipboard.js"></script>
+		<script src="js/lib/lodash.js"></script>
 
-  <!-- Basic libs -->
-  <script src='js/lib/ExpantaNum.js'></script>
-  <script src="js/lib/mousetrap.js"></script>
-  <script src='js/lib/notation.js'></script>
-  <script src="js/lib/clipboard.js"></script>
-  <script src="js/lib/lodash.js"></script>
+		<!-- Console for use on mobile -->
+		<script src="js/console.js"></script>
 
-  <!-- Console for use on mobile -->
-  <script src='js/console.js'></script>
+		<!-- Game libs -->
+		<script src="js/function.js"></script>
+		<script src="js/prestige.js"></script>
+		<script src="js/dom.js"></script>
+		<script src="js/upgrade.js"></script>
 
-  <!-- Game libs -->
-  <script src='js/function.js'></script>
-  <script src='js/prestige.js'></script>
-  <script src='js/dom.js'></script>
-  <script src='js/upgrade.js'></script>
+		<!-- Config Files -->
+		<script src="js/config.js"></script>
 
-  <!-- Config Files -->
-  <script src='js/config.js'></script>
+		<!-- Actual Game -->
+		<script src="js/main.js"></script>
+		<script src="js/saving.js"></script>
+	</head>
 
-  <!-- Actual Game -->
-  <script src='js/main.js'></script>
-  <script src="js/saving.js"></script>
-</head>
+	<body onload="startGame()" onunload="nyanSave()">
+		<div id="game">
+			<div id="topbar">
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<span id="title" onmousedown="window.open('credits.html')">True Infinity γ1.2.0</span>
+				|&nbsp;<span id='frames'></span> fps
+				<!--       <span id='ticker'></span> -->
+				<span id="linkscontainer" onmouseleave="blurLinks()">
+					<div id="linksarrow" onmousedown="focusLinks()">&Delta;</div>
+					<div id="links">
+						<a href="https://discord.gg/Jgrystv">Discord</a><br />
+						<a href="html/help.html">How to Play</a><br />
+						<a href="https://github.com/Reinhardt-C/TrueInfinity/blob/master/changelog.md/">Patch Notes</a><br />
+						<a href="beta/index.html">Beta</a><br />
+						<a href="alpha/index.html">Alpha</a>
+					</div>
+				</span>
+			</div>
 
-<body onload="startGame()" onunload="nyanSave()">
-  <div id='game'>
-    <div id='topbar'>
-      &nbsp;&nbsp;&nbsp;&nbsp;
-      <span id='title' onmousedown="window.open('credits.html')">True Infinity γ1.1.6</span>
-<!--       <span id='ticker'></span> -->
-      <span id='linkscontainer' onmouseleave="blurLinks()">
-        <div id="linksarrow" onmousedown="focusLinks()">&Delta;</div>
-        <div id="links">
-          <a href="https://discord.gg/Jgrystv/">Discord</a><br>
-          <a href="html/help.html">How to Play</a><br>
-          <a href="https://github.com/Reinhardt-C/TrueInfinity/blob/master/changelog.md/">Patch Notes</a><br>
-          <a href="beta/index.html">Beta</a><br>
-          <a href="alpha/index.html">Alpha</a>
-        </div>
-      </span>
-    </div>
+			<div id="sidebar">
+				<button id="sbt" onclick="toggleSidebar()" class="sbb"></button>
+				<br />
+				<br />
+				<button id="tabb0" onclick="tab(0)" class="sbb grey"></button>
+				<button id="tabb1" onclick="tab(1)" class="sbb blue"></button>
+				<button id="tabb2" onclick="tab(2)" class="sbb yellow"></button>
+				<button id="tabb3" onclick="tab(3)" class="sbb green"></button>
+				<br /><br /><br />
+				<button id="tabb100" onclick="tab(100)" class="sbb purple"></button>
+			</div>
 
-    <div id='sidebar'>
-      <button id='sbt' onclick='toggleSidebar()' class='sbb'></button>
-      <br>
-      <br>
-      <button id='tabb0' onclick='tab(0)' class='sbb grey'></button>
-      <button id='tabb1' onclick='tab(1)' class='sbb blue'></button>
-      <button id='tabb2' onclick='tab(2)' class='sbb yellow'></button>
-      <br><br><br>
-      <button id='tabb100' onclick='tab(100)' class='sbb purple'></button>
-    </div>
-
-    <div id='main'>
-      <div id='tab0' class='mt'>
-        <div id='layers'></div>
-      </div>
-      <div id='tab1' class='mt'>
-        <!--<button onclick="onBuyTriggers(['resetLayer', jea([0])])">Reset dims</button>
+			<div id="main">
+				<div id="tab0" class="mt">
+					<div id="layers"></div>
+				</div>
+				<div id="tab1" class="mt">
+					<!--<button onclick="onBuyTriggers(['resetLayer', jea([0])])">Reset dims</button>
         <button onclick="alert(eval(prompt('Enter your orders')))">(KEEP OUT) Eval</button>-->
-        <div class="os grey">
-          Saving
-          <button onclick="nyanSave()" class="sbb green">Save</button><br><br>
-        <!--<button onclick="copyStringToClipboard(JSON.stringify(game))">Raw debug export</button>
+					<div class="os grey">
+						Saving
+						<button onclick="nyanSave()" class="sbb green">Save</button><br /><br />
+						<!--<button onclick="copyStringToClipboard(JSON.stringify(game))">Raw debug export</button>
         <button onclick="copyStringToClipboard(getSaveString())">Debug Export</button>-->
-          <button onclick="copyStringToClipboard(getFinalSaveString())" class="sbb blue">Export</button>
-          <button onclick="nyanLoad(prompt('Paste your save below'))" class="sbb yellow">Import</button><br><br>
-          <button onclick="wipe()" class="sbb red">Wipe</button>
-        </div>
-      </div>
-      <div id='tab2' class='mt'>
-        <div id='upgtab1'>
-          <div id='upgrades1' class='upgs'>
-          </div>
-        </div>
-      </div>
-      <div id='tab100' class='mt'>
-          <div class="r">
-            <div class="rt" style="text-align: center">
-              <br>
-              <span id="unfunitypoints">0</span>
-              <br>
-          </div>
-          <div id='unfunUpg' class="g" style="height: 300px;padding-top: 15px; text-align: center;">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+						<button onclick="copyStringToClipboard(getFinalSaveString())" class="sbb blue">Export</button>
+						<button onclick="nyanLoad(prompt('Paste your save below'))" class="sbb yellow">Import</button><br /><br />
+						<button onclick="wipe()" class="sbb red">Wipe</button>
+					</div>
+				</div>
+				<div id="tab2" class="mt">
+					<div id="upgtab1">
+						<div id="upgrades1" class="upgs"></div>
+					</div>
+				</div>
+				<div id="tab3" class="mt">
+					<div id="axioms" class="flexbox">
+						<div>Extensionality&nbsp;<button onclick="buyAxiom(0)" class='axiombuy sbb red'>If you're reading this you're dumb</button></div>
+						<div>Regularity&nbsp;<button onclick="buyAxiom(1)" class='axiombuy sbb red'>If you're reading this you're dumb</button></div>
+						<div>Specification&nbsp;<button onclick="buyAxiom(2)" class='axiombuy sbb red'>If you're reading this you're dumb</button></div>
+						<div>Pairing&nbsp;<button onclick="buyAxiom(3)" class='axiombuy sbb red'>If you're reading this you're dumb</button></div>
+						<div>Union&nbsp;<button onclick="buyAxiom(4)" class='axiombuy sbb red'>If you're reading this you're dumb</button></div>
+						<div>Replacement&nbsp;<button onclick="buyAxiom(5)" class='axiombuy sbb red'>If you're reading this you're dumb</button></div>
+						<div>Infinity&nbsp;<button onclick="buyAxiom(6)" class='axiombuy sbb red'>If you're reading this you're dumb</button></div>
+						<div>Power Set&nbsp;<button onclick="buyAxiom(7)" class='axiombuy sbb red'>If you're reading this you're dumb</button></div>
+						<div>Choice&nbsp;<button onclick="buyAxiom(8)" class='axiombuy sbb red'>If you're reading this you're dumb</button></div>
+					</div>
+					<ul class="circle">
+						<li class="segment"><div class="stext"><small>Axiom of<br />Extensionality</small></div></li>
+						<li class="segment"><div class="stext"><small>Axiom of<br />Regularity</small></div></li>
+						<li class="segment"><div class="stext"><small>Axiom of<br />Specification</small></div></li>
+						<li class="segment"><div class="stext"><small>Axiom of<br />Pairing</small></div></li>
+						<li class="segment"><div class="stext"><small>Axiom of<br />Union</small></div></li>
+						<li class="segment"><div class="stext"><small>Axiom of<br />Replacement</small></div></li>
+						<li class="segment"><div class="stext"><small>Axiom of<br />Infinity</small></div></li>
+						<li class="segment"><div class="stext"><small>Axiom of<br />Power Set</small></div></li>
+						<li class="segment"><div class="stext"><small>Axiom of<br />Choice</small></div></li>
+					</ul>
+				</div>
+				<div id="tab100" class="mt">
+					<div class="r">
+						<div class="rt" style="text-align: center;">
+							<br />
+							<span id="unfunitypoints">0</span>
+							<br />
+						</div>
+						<div id="unfunUpg" class="g" style="height: 300px; padding-top: 15px; text-align: center;"></div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-  <div id="welcomeback">
-    Welcome back!<br>
-    You were offline for <span id='timeoffline'>0</span><span id='gainspan'> so you gain <span id='unfungain'>0</span> unfunity points.</span>
-    <span id="close" onmousedown="closeWB()">&times;&nbsp;</span>
-  </div>
+		<div id="welcomeback">
+			Welcome back!<br />
+			You were offline for <span id="timeoffline">0</span><span id="gainspan"> so you gain <span id="unfungain">0</span> unfunity points.</span>
+			<span id="close" onmousedown="closeWB()">&times;&nbsp;</span>
+		</div>
 
-  <div id="errC" style="position:fixed;bottom:0;right:0;display:none;">
-  </div>
+		<div id="errC" style="position: fixed; bottom: 0; right: 0; display: none;"></div>
 
-  <div id='errCtest' style="position:fixed;bottom:0;right:0;display:flex;flex-direction:column;">
-  </div>
-</body>
-
+		<div id="errCtest" style="position: fixed; bottom: 0; right: 0; display: flex; flex-direction: column;"></div>
+	</body>
 </html>

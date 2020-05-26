@@ -1,5 +1,15 @@
 # γ
 
+## γ1.2
+
+### γ1.2.0
+* Unfunity generates online
+* Fixed Dimensionsl Collapse
+* Infinity
+* Eternity
+* Axioms that buff stuff
+* FPS tracker
+
 ## γ1.1
 
 ### γ1.1.6
