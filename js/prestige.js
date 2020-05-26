@@ -289,14 +289,14 @@ class Dimension extends hasCache {
 
 	buyMax() {
 		if (!this.afford) return;
-		let p = this.points.logBase(2).mul(2).sqrt().floor();
-		if (p.gte(100)) {
-			this.points.subBy(D.pow(2, p.pow(2).div(2)));
-			this.amount.addBy(p);
-			this.bought.addBy(p);
-			return;
-		}
-		for (let i = 0; i < 5; i++) {
+		// let p = this.points.logBase(2).mul(2).sqrt().floor();
+		// if (p.gt(1)) {
+		// 	this.points.subBy(D.pow(2, p.pow(2).div(2)));
+		// 	this.amount.addBy(p);
+		// 	this.bought.addBy(p);
+		// 	return;
+		// }
+		for (let i = 0; this.afford && i < 5; i++) {
 			this.buy();
 		}
 		return;
