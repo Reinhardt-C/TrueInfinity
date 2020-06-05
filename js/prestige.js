@@ -64,6 +64,8 @@ class Layer {
 
 		this.tslp = tslp || 0;
 
+		this.timeout = 0;
+
 		this.domCreate();
 	}
 
@@ -105,6 +107,7 @@ class Layer {
 	}
 
 	update(diff) {
+		if (this.timeout > 0) this.timeout--;
 		if (!game.layersdone.includes(this.str_loc)) game.layersdone.push(this.str_loc);
 		this.tslp += diff;
 		this.state = game.upgradesBought.dimColl.gte(1) && this.dims[this.dims.length - 1].dim.gt(9);
@@ -211,8 +214,10 @@ class Layer {
 	}
 
 	maxAll() {
+		if (this.timeout > 0) return;
 		this.dims[0].buyMax();
 		for (let i = this.dims.length - 1; i > 0; i--) this.dims[i].buyMax();
+		this.timeout = 4;
 	}
 }
 
@@ -277,7 +282,7 @@ class Dimension extends hasCache {
 
 	buy() {
 		if (this.afford) {
-			if (this.points.toNumber() < Infinity) this.points.subBy(this.cost);
+			if (this.points.toNumber() < D.MAX_SAFE_INTEGER) this.points.subBy(this.cost);
 			if (this.amount.toNumber() < D.MAX_SAFE_INTEGER) this.amount.addBy(1);
 			this.bought.addBy(1);
 			this.doCache.cost = false;
@@ -290,15 +295,14 @@ class Dimension extends hasCache {
 	buyMax() {
 		if (!this.afford) return;
 		// let p = this.points.logBase(2).mul(2).sqrt().floor();
-		// if (p.gt(1)) {
-		// 	this.points.subBy(D.pow(2, p.pow(2).div(2)));
-		// 	this.amount.addBy(p);
-		// 	this.bought.addBy(p);
-		// 	return;
-		// }
-		for (let i = 0; this.afford && i < 5; i++) {
-			this.buy();
+		let p = this.points.logBase(2).sqrt().div(2).ceil();
+		if (p.gt(1)) {
+			// this.points.subBy(D.pow(2, p.pow(2).div(2)));
+			if (this.amount.toNumber() < D.MAX_SAFE_INTEGER) this.amount.addBy(p);
+			this.bought.addBy(p.add(2));
+			return;
 		}
+		this.buy();
 		return;
 		/*
     if (this.maxBuy.gt(0)) {

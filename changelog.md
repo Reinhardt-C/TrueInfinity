@@ -3,7 +3,7 @@
 ## γ1.2
 
 ### γ1.2.1
-* Better Buy Max / Max All
+* Better Buy Max / Max All (adds cooldown cause it makes it better for some reason)
 
 ### γ1.2.0
 * Unfunity generates online
