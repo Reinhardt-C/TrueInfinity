@@ -13,7 +13,7 @@ function updateElements() {
 			.pow(game.unfunitypoints),
 		4
 	)}&times; boost to all production.
-	<br>You are producing ${f(D.pow(2, game.unfunityUpgBought.doubleUnfun))} unfunity per hour ${game.onlineUnfun.neq(1) ? `with a ${f(game.onlineUnfun)}&times; online multiplier, giving total production of ${f(game.ufph)} unfunity per hour` : ""}`;
+	<br>You are producing ${f(D.pow(2, game.unfunityUpgBought.doubleUnfun))} unfunity per second ${game.onlineUnfun.neq(1) ? `with a ${f(game.onlineUnfun)}&times; online multiplier, giving total production of ${f(game.ufph)} unfunity per hour` : ""}`;
 
 	if (Object.keys(game.prestige).length > 1) setdisp("tabb3", "inline-block");
 	else hide("tabb3");
