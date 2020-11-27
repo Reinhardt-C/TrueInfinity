@@ -33,7 +33,7 @@ function gameLoop(diff) {
 
 	game.ufph = D.pow(2, game.unfunityUpgBought.doubleUnfun).mul(game.onlineUnfun);
 
-	let hours = diff / 3.6e6;
+	let hours = diff / 1e3;
 	game.unfunitypoints = game.unfunitypoints.add(D.pow(2, game.unfunityUpgBought.doubleUnfun).mul(hours).mul(game.onlineUnfun));
 	for (let i in game.prestige) game.prestige[i].update(diff);
 	updateDisplay();
