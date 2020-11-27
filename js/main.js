@@ -52,7 +52,7 @@ function startGame() {
 	diff = (thisUpdate - game.lastUpdate) * diffMultiplier;
 	document.getElementById("timeoffline").innerText = getDisplayTime(diff);
 	if (diff) {
-		let hours = diff / 3.6e6;
+		let hours = diff / 1e3;
 		game.unfunitypoints = game.unfunitypoints.add(D.pow(2, game.unfunityUpgBought.doubleUnfun).mul(hours).mul(game.offlineUnfun));
 		document.getElementById("unfungain").innerText = f(D.pow(2, game.unfunityUpgBought.doubleUnfun).mul(hours).mul(game.offlineUnfun));
 		document.getElementById("gainspan").style.display = "block";
