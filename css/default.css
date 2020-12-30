@@ -15,7 +15,7 @@
 }
 
 .r {
-	background-color: #A3A3A3;
+	background-color: #a3a3a3;
 }
 
 .g {
@@ -40,8 +40,8 @@
 }
 
 .green {
-	background-color: #B5DDA4;
-	border-color: #4DAA57;
+	background-color: #b5dda4;
+	border-color: #4daa57;
 }
 
 .red {
@@ -50,21 +50,26 @@
 }
 
 .brown {
-	background-color: #513C2C;
-	border-color: #28190E;
+	background-color: #513c2c;
+	border-color: #28190e;
 }
 
 .aqua {
-	background-color: #ACEDFF;
-	border-color: #89BBFE;
+	background-color: #acedff;
+	border-color: #89bbfe;
 }
 
 .yellow {
-	background-color: #FFD151;
-	border-color: #F8C537;
+	background-color: #ffd151;
+	border-color: #f8c537;
+}
+
+.orange {
+	background-color: #ffa600;
+	border-color: #c45f00;
 }
 
 .purple {
-	background-color: #89608E;
+	background-color: #89608e;
 	border-color: #553555;
 }

@@ -22,7 +22,7 @@
 }
 
 .sbb.height.norm {
-  font-size: 11px;
+	font-size: 11px;
 }
 
 .sbb.height.norm:hover {
@@ -63,4 +63,12 @@
 
 .sbb.half:active:not(.height) {
 	width: 42.5%;
+}
+
+.sbi {
+	width: 50%;
+	border: 5px solid;
+	border-radius: 5px;
+	display: inline-block;
+	box-sizing: border-box;
 }

@@ -34,8 +34,6 @@ samp,
 small,
 strike,
 strong,
-sub,
-sup,
 tt,
 var,
 b,
@@ -111,6 +109,25 @@ hr {
 	margin: 0;
 	padding: 0;
 }
+sup,
+sub {
+	font-size: 75%;
+}
+
+#loading {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 1000000000000;
+	background: #979797;
+	border: 5px outset grey;
+	box-sizing: border-box;
+}
+
+#loadingoverlay {
+	text-align: center;
+	line-height: 100%;
+}
 
 #game {
 	width: 100%;
@@ -146,6 +163,10 @@ hr {
 	width: 300px;
 }
 
+#sbt {
+	border-width: 0;
+}
+
 #main {
 	height: calc(100vh - 35px);
 	width: calc(100vw - 80px);
@@ -177,12 +198,6 @@ hr {
 	width: 100%;
 }
 
-#ticker {
-	width: calc(100vw - 371px);
-	height: 35px;
-	display: inline-block;
-}
-
 #linkscontainer {
 	transition: 2s;
 	white-space: nowrap;
@@ -192,7 +207,22 @@ hr {
 	margin-right: 0;
 	text-align: right;
 	background-color: darkgrey;
-	/* display: inline-block; */
+}
+
+#ticker {
+	width: calc(100vw - 330px);
+	height: 31px;
+	float: right;
+	overflow: hidden;
+	border: inset silver 2px;
+}
+
+#ord {
+	font-size: 80px;
+	text-align: center;
+	width: 100%;
+	height: 100px;
+	vertical-align: default;
 }
 
 #linkscontainer.expanded {
@@ -245,7 +275,7 @@ hr {
 	text-align: center;
 	font-size: xx-large;
 	padding: 20px;
-	z-index: 100000000000;
+	z-index: 10000000;
 	border: outset silver 5px;
 }
 
@@ -264,6 +294,37 @@ hr {
 	text-align: center;
 }
 
+#mainaut {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	top: -18px;
+}
+
+#autbox {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.autrow {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	height: 30vh;
+}
+
+.autthing {
+	height: 100%;
+	flex-basis: 0;
+	flex-grow: 1;
+	background-color: silver;
+	border: 5px outset darkgrey;
+	box-sizing: border-box;
+	text-align: center;
+}
+
 .side {
 	font-size: 20px;
 }
@@ -279,7 +340,7 @@ hr {
 	width: 200px;
 	float: left;
 	text-align: center;
-	overflow: hidden;
+	overflow: auto;
 	position: relative;
 }
 
@@ -353,6 +414,36 @@ hr {
 	height: 100%;
 }
 
+.ordfuncs {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	width: 100%;
+}
+.ordmss {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+}
+
+.ordfunc {
+	width: 150px;
+	height: 150px;
+	text-align: center;
+	background-color: slategray;
+	border: solid 3px #a0a0a0;
+	border-radius: 3px;
+}
+.ordms {
+	flex-basis: calc(20% - 6px);
+	height: 40px;
+	padding-top: 10px;
+	text-align: center;
+	background-color: slategray;
+	border: solid 3px #a0a0a0;
+	border-radius: 3px;
+}
+
 .blur {
 	filter: blur(5px);
 }
@@ -383,6 +474,7 @@ hr {
 	font-size: 14px;
 	line-height: 1.2;
 	transition-duration: 0.5s;
+	z-index: 10000000;
 }
 
 .axiombuy[data-tooltip]::before {
@@ -404,6 +496,7 @@ hr {
 	font-size: 14px;
 	line-height: 1.2;
 	transition-duration: 0.5s;
+	z-index: 10000000;
 }
 
 [data-tooltip]::after {
@@ -420,10 +513,12 @@ hr {
 	font-size: 0;
 	line-height: 0;
 	transition-duration: 0.5s;
+	z-index: 10000000;
 }
 
 .axiombuy[data-tooltip]::after {
 	display: none;
+	z-index: 10000000;
 }
 
 [data-tooltip]::before,
@@ -433,6 +528,7 @@ hr {
 	filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=0);
 	opacity: 0;
 	pointer-events: none;
+	z-index: 10000000;
 }
 
 [data-tooltip]:hover::before,
@@ -441,6 +537,7 @@ hr {
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
 	filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=100);
 	opacity: 100;
+	z-index: 10000000;
 }
 
 /* Circle Stuff */

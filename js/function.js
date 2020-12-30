@@ -68,7 +68,12 @@ function d(data) {
 
 function l(data) {
 	if (!data) return new Layer();
-	return new Layer(data.loc || [0], data.points || 0, data.power || 0, data.dims || [new Dimension()]);
+	return new Layer(
+		data.loc || [0],
+		data.points || 0,
+		data.power || 0,
+		data.dims || [new Dimension()]
+	);
 }
 
 function newElem(type) {
@@ -83,13 +88,20 @@ function clearAll() {
 	document.getElementById("layers").innerHTML = "";
 	document.getElementById("upgrades1").innerHTML = "";
 	document.getElementById("unfunUpg").innerHTML = "";
+	document.getElementById("tab5").innerHTML = `
+		<div id="ord"></div>
+		<div id="funcs" class="ordfuncs"></div>
+		<br />
+		<div id="ms" class="ordmss"></div>
+	`;
 }
 
 function secretFormula(amount, dim, mult) {
 	amount = D(amount);
 	dim = D(dim);
 	mult = D(mult);
-	let result = amount.mul(mult).pow(dim.sub(1));
+	let result = amount.mul(mult).pow(dim);
+	result = result.mul(D.log(result));
 	// let result = D.max(D.choose(dim.pow(amount.mul(dim)), amount.mul(dim)), dim.pow(amount.mul(dim))).pow(6.5);
 	return result;
 }
@@ -159,9 +171,19 @@ class hasCache {
 
 function getDisplayTime(ms) {
 	if (ms < 1000) return Math.floor(ms) + " millisecond" + (Math.floor(ms) != 1 ? "s" : "");
-	if (ms < 60000) return (ms / 1000).toFixed(1) + " second" + (Math.floor(ms / 1000) != 1 ? "s" : "");
-	if (ms < 3600000) return (ms / 60000).toFixed(1) + " minute" + (Math.floor(ms / 60000) != 1 ? "s" : "");
-	if (ms < 8.64e7) return Math.floor(ms / 3600000) + " hour" + (Math.floor(ms / 3600000) != 1 ? "s" : "") + " and " + Math.floor((ms / 3600000 - Math.floor(ms / 3600000)) * 60) + " minutes";
+	if (ms < 60000)
+		return (ms / 1000).toFixed(1) + " second" + (Math.floor(ms / 1000) != 1 ? "s" : "");
+	if (ms < 3600000)
+		return (ms / 60000).toFixed(1) + " minute" + (Math.floor(ms / 60000) != 1 ? "s" : "");
+	if (ms < 8.64e7)
+		return (
+			Math.floor(ms / 3600000) +
+			" hour" +
+			(Math.floor(ms / 3600000) != 1 ? "s" : "") +
+			" and " +
+			Math.floor((ms / 3600000 - Math.floor(ms / 3600000)) * 60) +
+			" minutes"
+		);
 	else return (ms / 8.64e7).toFixed(1) + " day" + (ms / 8.64e7 != 1 ? "s" : "");
 }
 

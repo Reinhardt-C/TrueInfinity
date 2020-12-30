@@ -1,6 +1,23 @@
 # γ
 
-## γ1.2
+## γ1.3 The Ordinal Update
+
+### γ1.3.0
+* Unfunity gain is multiplied 5x when you're online
+* Adds the rest of the ZF axioms, this isn't the end though ;)
+* Ordinals are added
+* Ordinal functions that divide unfunity to build towards
+* Ordinal milestones boost progress
+* Fix some style issues
+* Hide unfunity in early game
+* Unfunity production slows in time without interaction of the main game
+* Increase Dimensional Compression limit 5 -> 10
+* Increase Dimensional Compression CSI e5 -> e6
+* Dimensional Compression and Dimensional Stabillizer resets on prestige
+* Add Dimensional Jump upgrade
+* Added loading screen with cheaty promises to look like my code is doing something but it's just stalling for the effect
+
+## γ1.2 - The """"Balancing"""" Update
 
 ### γ1.2.1
 * Better Buy Max / Max All (adds cooldown cause it makes it better for some reason)
@@ -13,7 +30,7 @@
 * Axioms that buff stuff
 * FPS tracker
 
-## γ1.1
+## γ1.1 - The Unfun Update
 
 ### γ1.1.6
 * Uncapped the Double Unfun upgrade
@@ -38,7 +55,7 @@
 * Added Unfunity which serves as offline progress
 * Added Unfunity Upgrades which do stuff
 
-## γ1.0
+## γ1.0 - The Gamma Update
 
 ### γ1.0.0
 #### New Features

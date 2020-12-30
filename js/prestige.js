@@ -1,8 +1,15 @@
 class Game {
 	constructor(data) {
+		this.version = "g1.3.0";
+
 		this.lastUpdate = data ? data.lastUpdate || new Date().getTime() : new Date().getTime();
 		this.sbe = false;
 		this.tab = 0;
+		this.frameSkip = false;
+		this.updateNextFrame = 0;
+
+		// Time since last interaction
+		this.tsli = 0;
 
 		this.prestige = {};
 		this.upgradesBought = [];
@@ -18,6 +25,25 @@ class Game {
 		this.offlineUnfun = D(1);
 		this.ufph = D(1);
 
+		this.aut = false;
+		this.autPriorities = [0, 1, 2, 3, 4, 5];
+		this.automators = [];
+		for (let i = 0; i < config.automators.length; i++) {
+			let a = config.automators[i];
+			this.automators.push(
+				new Automator(
+					a.name,
+					i,
+					this.autPriorities[i],
+					a.func,
+					false,
+					a.price,
+					a.parameters,
+					a.vreq
+				)
+			);
+		}
+
 		this.upgrades = {};
 
 		this.notation = data ? data.notation || "sci" : "sci";
@@ -27,18 +53,56 @@ class Game {
 				this.prestige[i] = l(data.prestige[i]);
 			}
 
-		this.names = ["", "infinity", "eternity", "reality", "equality", "affinity", "celerity", "identity", "vitality", "immunity", "atrocity", "immensity", "severity", "fatality", "insanity", "calamity", "futility", "finality", "unity"];
+		this.names = [
+			"",
+			"infinity",
+			"eternity",
+			"reality",
+			"equality",
+			"affinity",
+			"celerity",
+			"identity",
+			"vitality",
+			"immunity",
+			"atrocity",
+			"immensity",
+			"severity",
+			"fatality",
+			"insanity",
+			"calamity",
+			"futility",
+			"finality",
+			"unity",
+		];
 		this.layersdone = [];
 
 		// Extensionality, Regularity, Specification, Pairing, Union, Replacement, Infinity, Power Set, Choice
 		// this.axioms = [true, false, true, false, true, false, false, false, false];
 		this.axioms = new Array(9).fill(false);
+
+		this.ord = O(0);
+		this.ordinalHandler = new OrdinalHandler(this);
 	}
 
 	maxAllLayers() {
 		for (let layer in this.prestige) {
 			this.prestige[layer].maxAll();
 		}
+	}
+
+	milestoneUnlocked(n) {
+		return game.ord.cmp(O(config.ordMilestones[n])) > -1;
+	}
+
+	unlockAut() {
+		if (game.prestige[jea([1])] && game.prestige[jea([1])].points.gte(10000)) {
+			game.prestige[jea([1])].points.subBy(10000);
+			this.aut = true;
+		}
+	}
+
+	ucname(l) {
+		return this.names[l].replace(/^./, m => m.toUpperCase());
 	}
 }
 
@@ -58,7 +122,7 @@ class Layer {
 			}
 		} else this.dims = [new Dimension(this.loc, 0)];
 
-		this.state = game.upgradesBought.dimColl.gte(1);
+		this.state = game ? game.upgradesBought.dimColl.gte(1) : false;
 
 		this.id = getFreeId();
 
@@ -75,6 +139,7 @@ class Layer {
 		this.dims[0].domCreate(this.id);
 		this.points = D(this.str_loc == jea([0]) ? 1 : 0);
 		this.power = D(0);
+		this.tslp = 0;
 	}
 
 	get canPrestige() {
@@ -85,7 +150,8 @@ class Layer {
 		return prestigeGain(this.points);
 	}
 
-	prestige() {
+	prestige(aut = false, min = D(0)) {
+		if (aut && this.tslp < min.toNumber() * 1000) return;
 		let a = [this.loc[0].add(1)];
 		let gain = this.prestigeGain;
 		for (let i in game.prestige) if (this.cmp(game.prestige[i]) > -1) game.prestige[i].clear();
@@ -95,6 +161,19 @@ class Layer {
 		} else {
 			game.prestige[j(a)] = new Layer(a, gain);
 		}
+		if (!(game.axioms[6] && JSON.stringify(this.loc) == jea([0]))) {
+			game.upgradesBought.dimComp = D(0);
+			game.upgradesBought.dimStab = D(0);
+			game.upgradesBought.dimJump = game.axioms[7] ? D(3) : D(0);
+		}
+		if (this.cmp(game.prestige[jea([0])]) == 1) game.unfunitypoints = D(0);
+		if (this.cmp(game.prestige[jea([1])]) == 1 && !game.milestoneUnlocked(4)) {
+			const keep = game.axioms[1];
+			game.axioms.fill(false);
+			game.axioms[1] = keep;
+		}
+
+		if (!aut) game.tsli = 0;
 	}
 
 	cmp(other) {
@@ -102,7 +181,7 @@ class Layer {
 		if (this.loc.length < other.loc.length) return -1;
 		if (this.loc[0] > other.loc[0]) return 1;
 		if (this.loc[0] < other.loc[0]) return -1;
-		//remember to do this when not lazy
+		// remember to do this when not lazy
 		return 0;
 	}
 
@@ -112,10 +191,12 @@ class Layer {
 		this.tslp += diff;
 		this.state = game.upgradesBought.dimColl.gte(1) && this.dims[this.dims.length - 1].dim.gt(9);
 		let sec = diff / 1000;
-		this.domUpdate();
+		if (!game.frameSkip || game.updateNextFrame == 0) this.domUpdate();
 
 		while (this.state && this.dims.length > 4) {
-			document.getElementById("g" + this.id).removeChild(document.getElementById("d" + this.dims[1].id));
+			document
+				.getElementById("g" + this.id)
+				.removeChild(document.getElementById("d" + this.dims[1].id));
 			this.dims.splice(1, 1);
 		}
 
@@ -123,13 +204,16 @@ class Layer {
 		for (let i = 0; i < this.dims.length; i++) {
 			dim = this.dims[i];
 			if (dim) {
-				if (dim.dim.eq(0)) (this.str_loc == jea([0]) ? this.points : this.power).addBy(dim.perSec.times(sec));
+				if (dim.dim.eq(0))
+					(this.str_loc == jea([0]) ? this.points : this.power).addBy(dim.perSec.times(sec));
 				else if (!this.state) this.dims[i - 1].amount.addBy(dim.perSec.times(sec));
 				dim.update();
 			}
 		}
 		if (this.state) {
-			this.dims[0].amount.addBy(secretFormula(this.dims[1].amount, this.dims[1].dim, this.dims[1].mult));
+			this.dims[0].amount.addBy(
+				secretFormula(this.dims[1].amount, this.dims[1].dim, this.dims[1].mult)
+			);
 			this.dims[1].amount.addBy(this.dims[2].perSec.times(sec));
 		}
 		if (this.dims[this.dims.length - 1] && this.dims[this.dims.length - 1].amount.gte(1)) {
@@ -182,8 +266,12 @@ class Layer {
 	}
 
 	domUpdate() {
-		document.getElementById("pa" + this.id).style.display = this.canPrestige ? "inline-block" : "none";
-		document.getElementById("pa" + this.id).innerText = `${this.next_name.substring(0, 1).toUpperCase() + this.next_name.substring(1)} for ${f(this.prestigeGain)} points`;
+		document.getElementById("pa" + this.id).style.display = this.canPrestige
+			? "inline-block"
+			: "none";
+		document.getElementById("pa" + this.id).innerText = `${
+			this.next_name.substring(0, 1).toUpperCase() + this.next_name.substring(1)
+		} for ${f(this.prestigeGain)} points`;
 		if (this.str_loc != jea([0])) {
 			document.getElementById("rt" + this.id).innerText = `
         You have ${f(this.points)} ${this.name} points and ${f(this.power)} ${this.name} power.
@@ -197,6 +285,10 @@ class Layer {
 
 	get name() {
 		if (this.loc[0].lt(game.names.length)) return game.names[this.loc[0].toNumber()];
+	}
+
+	get ucname() {
+		return this.name.replace(/^./, m => m.toUpperCase());
 	}
 
 	get next_name() {
@@ -213,11 +305,12 @@ class Layer {
 		};
 	}
 
-	maxAll() {
+	maxAll(aut = false) {
 		if (this.timeout > 0) return;
 		this.dims[0].buyMax();
 		for (let i = this.dims.length - 1; i > 0; i--) this.dims[i].buyMax();
 		this.timeout = 4;
+		if (!aut) game.tsli = 0;
 	}
 }
 
@@ -233,18 +326,40 @@ class Dimension extends hasCache {
 
 		this.id = getFreeId();
 
-		this.baseCost = D.pow(10, D.pow(2, ExpantaNum.max(0, this.dim.sub(this.loc[0]))).sub(1));
 		this.costScaleIncrease = D.pow(1.15, this.dim.plus(1));
 	}
 
+	get baseCost() {
+		// return D.pow(10, D.pow(2, ExpantaNum.max(0, this.dim.sub(this.loc[0]))).sub(1));
+		if (this.loc[0].eq(0))
+			return D.pow(
+				10,
+				D.pow(2, ExpantaNum.max(0, this.dim.sub(this.loc[0]).sub(game.upgradesBought.dimJump))).sub(
+					1
+				)
+			);
+		else return D.pow(10, D.pow(2, ExpantaNum.max(0, this.dim.sub(this.loc[0]))).sub(1));
+	}
+
 	update() {
-		document.getElementById(`text${this.id}`).innerHTML = this.displayText;
-		if (this.afford) {
-			document.getElementById("b1" + this.id).className = document.getElementById("b1" + this.id).className.replace("red", "green");
-			document.getElementById("b2" + this.id).className = document.getElementById("b1" + this.id).className.replace("red", "green");
-		} else {
-			document.getElementById("b1" + this.id).className = document.getElementById("b1" + this.id).className.replace("green", "red");
-			document.getElementById("b2" + this.id).className = document.getElementById("b1" + this.id).className.replace("green", "red");
+		if (game.frameSkip && game.updateNextFrame != 0) return;
+		if (game.tab == 0) {
+			document.getElementById(`text${this.id}`).innerText = this.displayText;
+			if (this.afford) {
+				document.getElementById("b1" + this.id).className = document
+					.getElementById("b1" + this.id)
+					.className.replace("red", "green");
+				document.getElementById("b2" + this.id).className = document
+					.getElementById("b1" + this.id)
+					.className.replace("red", "green");
+			} else {
+				document.getElementById("b1" + this.id).className = document
+					.getElementById("b1" + this.id)
+					.className.replace("green", "red");
+				document.getElementById("b2" + this.id).className = document
+					.getElementById("b1" + this.id)
+					.className.replace("green", "red");
+			}
 		}
 	}
 
@@ -259,7 +374,7 @@ class Dimension extends hasCache {
 
 		let t = newElem("div");
 		t.id = "text" + this.id;
-		t.innerHTML = this.displayText;
+		t.innerText = this.displayText;
 		dBox.appendChild(t);
 
 		let b1 = newElem("button");
@@ -282,14 +397,15 @@ class Dimension extends hasCache {
 
 	buy() {
 		if (this.afford) {
-			if (this.points.toNumber() < D.MAX_SAFE_INTEGER) this.points.subBy(this.cost);
-			if (this.amount.toNumber() < D.MAX_SAFE_INTEGER) this.amount.addBy(1);
+			this.points.subBy(this.cost);
+			this.amount.addBy(1);
 			this.bought.addBy(1);
 			this.doCache.cost = false;
 			this.doCache.multText = false;
 			this.doCache.mult = false;
 			this.doCache.initCostScale = false;
 		}
+		game.tsli = 0;
 	}
 
 	buyMax() {
@@ -298,11 +414,12 @@ class Dimension extends hasCache {
 		let p = this.points.logBase(2).sqrt().div(2).ceil();
 		if (p.gt(1)) {
 			// this.points.subBy(D.pow(2, p.pow(2).div(2)));
-			if (this.amount.toNumber() < D.MAX_SAFE_INTEGER) this.amount.addBy(p);
+			this.amount.addBy(p);
 			this.bought.addBy(p.add(2));
 			return;
 		}
 		this.buy();
+		game.tsli = 0;
 		return;
 		/*
     if (this.maxBuy.gt(0)) {
@@ -319,6 +436,7 @@ class Dimension extends hasCache {
     return false
     */
 	}
+
 	freshCache(name) {
 		return !(name in Object.keys(this.cache)) || !this.doCache[name];
 	}
@@ -363,8 +481,15 @@ class Dimension extends hasCache {
 	}
 
 	get multPerBought() {
+		if (JSON.stringify(this.loc) == jea([0]))
+			return this.callCache("multPerBought", function () {
+				return D.pow(
+					D(2).plus(D.log(game.upgradesBought["dimComp"].plus(1), 1.5).div(2)),
+					D.log(game.upgradesBought["dimComp"].plus(1), 3).div(2).plus(1)
+				);
+			});
 		return this.callCache("multPerBought", function () {
-			return D.pow(D(2).plus(D.log(game.upgradesBought["dimComp"].plus(1), 1.5).div(2)), D.log(game.upgradesBought["dimComp"].plus(1), 3).div(2).plus(1));
+			return D(2);
 		});
 	}
 
@@ -372,27 +497,45 @@ class Dimension extends hasCache {
 		return this.callCache("mult", function () {
 			let ret = D.pow(this.multPerBought, this.bought)
 				.mul(
-					D(1.015)
-						.pow((game.unfunityUpgBought.superUnfun ? game.unfunityUpgBought.superUnfun : D(0)).add(1))
-						.pow(game.unfunitypoints)
+					D(1.015).pow(
+						(game.unfunityUpgBought.superUnfun ? game.unfunityUpgBought.superUnfun : D(0))
+							.add(1)
+							.mul(game.unfunitypoints)
+					)
 				)
-				.iteratedlog(10, this.loc[0]);
+				.pow(D.pow(10, this.loc[0].mul(-1)));
 			if (ret.eq(0) || ret.isNaN()) ret = D(1);
 			let a = [this.loc[0].add(1)];
 			let p = game.prestige[j(a)] !== undefined;
-			return p
-				? ret
-						.mul(ExpandtaNum.max(1, game.prestige[j(a)].power))
-						.mul(ExpandtaNum.max(1, game.prestige[j(a)].points))
-						.pow(4.1)
-				: ret;
+			let a2 = [this.loc[0].add(2)];
+			let p2 = game.prestige[j(a2)] !== undefined;
+			if (p2)
+				ret.timesBy(
+					ExpandtaNum.log(
+						ExpandtaNum.max(1, game.prestige[j(a2)].power)
+							.mul(ExpandtaNum.max(1, game.prestige[j(a2)].points))
+							.add(1)
+					)
+				);
+			if (p)
+				ret.timesBy(
+					ExpandtaNum.log(
+						ExpandtaNum.max(1, game.prestige[j(a)].power)
+							.mul(ExpandtaNum.max(1, game.prestige[j(a)].points))
+							.add(1)
+					)
+				);
+			return ret;
 		});
 	}
 
 	get cost() {
 		return this.callCache("cost", function () {
 			let ret = this.baseCost.times(D.pow(this.initCostScale, this.bought)); // Basic cost
-			if (this.bought.gt(0)) ret.timesBy(D.pow(this.costScaleIncrease, D.mul(this.bought, this.bought.toNumber() + 1).div(2)));
+			if (this.bought.gt(0))
+				ret.timesBy(
+					D.pow(this.costScaleIncrease, D.mul(this.bought, this.bought.toNumber() + 1).div(2))
+				);
 			// if (this.bought.gt(0)) ret.timesBy(D.pow(this.costScaleIncrease, D.sumArithmeticSeries(this.bought, D(1), D(1), D(0))));
 			return ret;
 		});
@@ -411,8 +554,16 @@ class Dimension extends hasCache {
 	}
 
 	get initCostScale() {
+		if (this.loc[0].eq(0))
+			return this.callCache("initCostScale", function () {
+				let ret = D.pow(
+					10,
+					this.dim.plus(1).mul(D.log(game.upgradesBought["dimComp"].plus(1), 2).div(2).plus(1))
+				); // dimComp
+				return ret;
+			});
 		return this.callCache("initCostScale", function () {
-			let ret = D.pow(10, this.dim.plus(1).mul(D.log(game.upgradesBought["dimComp"].plus(1), 2).div(2).plus(1))); // dimComp
+			let ret = D.pow(10, this.dim.plus(1));
 			return ret;
 		});
 	}
@@ -420,14 +571,19 @@ class Dimension extends hasCache {
 	get multText() {
 		return this.callCache("mulText", function () {
 			let temp = this.applySlowdown(this.mult);
-			return temp.gte(1) ? `&times;${f(temp)}` : `&divide;${f(this.slowdown.div(this.mult))}`;
+			return temp.gte(1) ? `×${f(temp)}` : `÷${f(this.slowdown.div(this.mult))}`;
 		});
 	}
 
 	get displayText() {
-		return `Dimension ${f(this.dim.add(1))}<br>
-      ${f(this.amount)} ${this.multText}<br>
-      Cost: ${f(this.cost)}<br>`;
+		try {
+			return `Dimension ${f(this.dim.add(1))}
+      ${f(this.amount)} ${this.multText}
+	  Cost: ${f(this.cost)}
+	  `;
+		} catch {
+			return "";
+		}
 	}
 
 	get array() {
