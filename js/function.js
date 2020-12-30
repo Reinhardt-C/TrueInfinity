@@ -101,7 +101,7 @@ function secretFormula(amount, dim, mult) {
 	dim = D(dim);
 	mult = D(mult);
 	let result = amount.mul(mult).pow(dim);
-	result = result.mul(D.log(result));
+	result = result.mul(D.logBase(result, 1.5).pow(2));
 	// let result = D.max(D.choose(dim.pow(amount.mul(dim)), amount.mul(dim)), dim.pow(amount.mul(dim))).pow(6.5);
 	return result;
 }

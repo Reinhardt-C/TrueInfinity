@@ -2,6 +2,9 @@
 
 ## γ1.3 The Ordinal Update
 
+### γ1.3.1
+* Made Dimensional Collapse more powerful
+
 ### γ1.3.0
 * Unfunity gain is multiplied 5x when you're online
 * Adds the rest of the ZF axioms, this isn't the end though ;)
